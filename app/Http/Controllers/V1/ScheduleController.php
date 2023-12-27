@@ -16,11 +16,8 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = QueryBuilder::for(Schedule::class)
-            ->allowedFilters('name')
-            ->defaultSort('name')
-            ->allowedSorts('name')
             ->latest()
-            ->with('teacher')
+            ->with('teacher', "subject", "classroom")
             ->jsonPaginate();
 
         return ScheduleListResource::collection($schedules)->additional([

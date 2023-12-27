@@ -4,7 +4,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\ChangePasswordRequest;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 
 class PasswordController extends Controller
 {
@@ -13,5 +13,7 @@ class PasswordController extends Controller
         $request->user()->update([
             'password' => Hash::make($request->new_password),
         ]);
+
+        return response()->json(["message" => "success to change password"]);
     }
 }
